@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sick's Portfolio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: #f2f2f2;
+      background: linear-gradient(135deg, #0b0e13, #1a1f2b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Card in center */
+    .card {
+      background: rgba(20, 25, 35, 0.95);
+      padding: 60px 80px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      letter-spacing: 1px;
+    }
+
+    button {
+      background: transparent;
+      border: 2px solid #f2f2f2;
+      color: #f2f2f2;
+      padding: 14px 36px;
+      margin: 0 12px;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    button:hover {
+      background: #f2f2f2;
+      color: #0b0e13;
+    }
+
+    /* Modal overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      padding: 20px;
+    }
+
+    /* Modal box */
+    .modal {
+      background: #14181f;
+      padding: 50px 40px 40px 40px;
+      border-radius: 14px;
+      width: 600px; /* wider modal */
+      max-width: 100%;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.7);
+      text-align: center;
+      position: relative;
+    }
+
+    .modal h2 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-weight: bold;
+      font-size: 2rem;
+    }
+
+    .modal p {
+      margin-bottom: 20px;
+      font-size: 1rem;
+      word-break: break-word;
+    }
+
+    /* Multi-line textarea */
+    .modal textarea {
+      width: 100%;
+      min-height: 120px; /* multiple lines */
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #2a3142;
+      background: #10131a; /* slightly darker than modal */
+      color: #f2f2f2;
+      font-family: inherit;
+      font-size: 1rem;
+      resize: vertical;
+      margin-bottom: 30px;
+    }
+
+    /* Bottom buttons container */
+    .modal .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .modal .button-row button {
+      width: 140px;
+    }
+
+    /* Hover styling remains same */
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>My Projects</h1>
+    <button onclick="openTextModal()">Tsundere Bot</button>
+    <button onclick="openModal()">Support Info</button>
+  </div>
+
+  <!-- Support Info Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <h2>How to contact me</h2>
+      <p>Message me on Discord @sickjm4</p>
+      <div class="button-row">
+        <button onclick="closeModal()">Go Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text + Copy Modal -->
+  <div class="modal-overlay" id="textModal">
+    <div class="modal">
+      <h2>Tsundere Bot Invite</h2>
+      <p>Here is your invite link — copy it below:</p>
+      <textarea id="tokenBox" readonly>https://discord.com/oauth2/authorize?client_id=1461617423693381655&integration_type=0&scope=bot%20applications.commands&permissions=8</textarea>
+      <div class="button-row">
+        <button onclick="copyText()">Copy Text</button>
+        <button onclick="closeTextModal()">Go Back</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Support modal
+    function openModal() {
+      document.getElementById("modal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    // Text modal
+    function openTextModal() {
+      document.getElementById("textModal").style.display = "flex";
+    }
+
+    document.getElementById("tokenBox").value = "https://discord.com/oauth2/authorize?client_id=1461617423693381655&integration_type=0&scope=bot%20applications.commands&permissions=8";
+
+    function closeTextModal() {
+      document.getElementById("textModal").style.display = "none";
+    }
+
+    // Copy text function
+    function copyText() {
+      const textBox = document.getElementById("tokenBox");
+      textBox.select();
+      textBox.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(textBox.value).then(() => {
+        alert("Copied to clipboard!");
+      });
+    }
+  </script>
+
+</body>
+</html>
