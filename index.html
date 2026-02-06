@@ -55,6 +55,19 @@
       color: #0b0e13;
     }
 
+    /* Clickable text for devlog */
+    .clickable-text {
+      margin-top: 20px;
+      cursor: pointer;
+      text-decoration: underline;
+      color: #f2f2f2;
+      transition: color 0.25s ease;
+    }
+
+    .clickable-text:hover {
+      color: #a0c4ff;
+    }
+
     /* Modal overlay */
     .modal-overlay {
       position: fixed;
@@ -69,10 +82,10 @@
 
     /* Modal box */
     .modal {
-      background: #14181f;
+      background: rgba(20, 25, 35, 0.95);
       padding: 50px 40px 40px 40px;
       border-radius: 14px;
-      width: 600px; /* wider modal */
+      width: 600px;
       max-width: 100%;
       box-shadow: 0 30px 100px rgba(0,0,0,0.7);
       text-align: center;
@@ -87,24 +100,30 @@
     }
 
     .modal p {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       font-size: 1rem;
       word-break: break-word;
+      text-align: left;
+    }
+
+    .modal p strong {
+      font-size: 1.05rem;
     }
 
     /* Multi-line textarea */
     .modal textarea {
       width: 100%;
-      min-height: 120px; /* multiple lines */
+      min-height: 80px;
+      max-height: 150px;
       padding: 12px;
       border-radius: 8px;
       border: 1px solid #2a3142;
-      background: #10131a; /* slightly darker than modal */
+      background: #10131a;
       color: #f2f2f2;
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 0.95rem;
       resize: vertical;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     /* Bottom buttons container */
@@ -119,7 +138,12 @@
       width: 140px;
     }
 
-    /* Hover styling remains same */
+    /* Scrollable modal */
+    .modal-scroll {
+      max-height: 80vh;
+      overflow-y: auto;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
@@ -128,6 +152,7 @@
     <h1>My Projects</h1>
     <button onclick="openTextModal()">Tsundere Bot</button>
     <button onclick="openModal()">Support Info</button>
+    <p class="clickable-text" onclick="openDevlog()">View Devlog</p>
   </div>
 
   <!-- Support Info Modal -->
@@ -154,6 +179,48 @@
     </div>
   </div>
 
+  <!-- Devlog Modal -->
+  <div class="modal-overlay" id="devlogModal">
+    <div class="modal modal-scroll">
+      <h2>Devlog</h2>
+
+      <!-- Devlog Entry 1 -->
+      <p><strong>Version 0.1 - Added 2 commands</strong></p>
+      <textarea readonly>
+- /Miku - Miku themed chatbot
+- /Tsundere - Tsundere themed chatbot
+- Set up basic functionality
+      </textarea>
+
+      <!-- Devlog Entry 2 -->
+      <p><strong>Version 0.2 - Chainsaw Man Update</strong></p>
+      <textarea readonly>
+- /Reze - Reze themed chatbot
+- Personality update for Tsundere chatbot
+      </textarea>
+
+      <!-- Devlog Entry 3 -->
+      <p><strong>Version 0.3 - Biggest update yet</strong></p>
+      <textarea readonly>
+- Replaced the commands with a ping system (@tsundere)
+- Bot is back up after lots of downtime
+- Message log system beta
+      </textarea>
+
+      <!-- Devlog Entry 4 -->
+      <p><strong>Version 0.4 - Website & Security</strong></p>
+      <textarea readonly>
+- Set up website to streamline the invite experience
+- Remove log system due to privacy concerns
+- Added a modern update alert system
+      </textarea>
+
+      <div class="button-row">
+        <button onclick="closeDevlog()">Close</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Support modal
     function openModal() {
@@ -167,9 +234,6 @@
     function openTextModal() {
       document.getElementById("textModal").style.display = "flex";
     }
-
-    document.getElementById("tokenBox").value = "https://discord.com/oauth2/authorize?client_id=1461617423693381655&integration_type=0&scope=bot%20applications.commands&permissions=8";
-
     function closeTextModal() {
       document.getElementById("textModal").style.display = "none";
     }
@@ -182,6 +246,14 @@
       navigator.clipboard.writeText(textBox.value).then(() => {
         alert("Copied to clipboard!");
       });
+    }
+
+    // Devlog modal
+    function openDevlog() {
+      document.getElementById("devlogModal").style.display = "flex";
+    }
+    function closeDevlog() {
+      document.getElementById("devlogModal").style.display = "none";
     }
   </script>
 
