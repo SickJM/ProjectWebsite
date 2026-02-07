@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tsundere Bot</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: #f2f2f2;
+      overflow-x: hidden;
+      min-height: 100vh;
+      /* Dark gradient background */
+      background: linear-gradient(135deg, #0b0e13, #1a1f27);
+      position: relative;
+    }
+
+    /* Particle canvas */
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Top navigation */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      background: rgba(20, 25, 35, 0.85);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 0 30px;
+      z-index: 10;
+    }
+
+    .nav-button {
+      background: none;
+      border: none;
+      color: #f2f2f2;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .nav-button:hover { color: #a0c4ff; }
+
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(20, 25, 35, 0.95);
+      border-radius: 10px;
+      padding: 10px 0;
+      min-width: 200px;
+      display: none;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+    .dropdown-menu button {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #f2f2f2;
+      padding: 12px 20px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .dropdown-menu button:hover { background: rgba(255,255,255,0.08); }
+    .dropdown:hover .dropdown-menu { display: block; }
+
+    /* Page content */
+    .page {
+      padding: 140px 30px 60px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    /* Hero section */
+    .hero {
+      background: rgba(20, 25, 35, 0.95);
+      border-radius: 16px;
+      padding: 50px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto 30px; }
+
+    .invite-box {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .invite-box textarea {
+      width: 420px;
+      max-width: 100%;
+      padding: 12px;
+      background: #10131a;
+      color: #f2f2f2;
+      border: 1px solid #2a3142;
+      border-radius: 8px;
+      resize: none;
+    }
+    .invite-box button {
+      padding: 12px 26px;
+      background: #a0c4ff;
+      border: none;
+      color: #0b0e13;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .invite-box button:hover { opacity: 0.9; }
+
+    /* Sections */
+    .section {
+      margin-top: 60px;
+      background: rgba(20, 25, 35, 0.95);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .section h2 { margin-top: 0; margin-bottom: 20px; }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .feature {
+      background: #10131a;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #2a3142;
+    }
+
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .screenshots img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #2a3142;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Particle background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Top navigation -->
+  <div class="top-bar">
+    <button class="nav-button" onclick="location.href='index.html'">Home</button>
+
+    
+  </div>
+
+  <!-- Page Content -->
+  <div class="page">
+
+    <!-- Hero section -->
+    <div class="hero">
+      <h1>Tsundere Bot</h1>
+      <p>
+        A personality-driven Discord bot built for fun, engagement,
+        and privacy-conscious communities.
+      </p>
+
+      <div class="invite-box">
+        <textarea id="inviteLink" readonly>https://discord.com/oauth2/authorize?client_id=1461617423693381655</textarea>
+        <button onclick="copyInvite()">Copy Invite</button>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="section">
+      <h2>Features</h2>
+      <div class="features">
+        <div class="feature">💬 Tsundere-style conversational responses</div>
+        <div class="feature">🔔 No commands just do @tsundere</div>
+        <div class="feature">🔒 No message logging</div>
+        <div class="feature">⚡ Powered by gpt-4o-mini</div>
+        <div class="feature">🛠 Updated weekly</div>
+        <div class="feature">🧠 constantly evolving</div>
+      </div>
+    </div>
+
+    <!-- Screenshots -->
+    <div class="section">
+      <h2>Screenshots</h2>
+      <div class="screenshots">
+        <img src="screenshot1.png" alt="In discord updates">
+        <img src="screenshot2.png" alt="Conversation example 1">
+        <img src="screenshot3.png" alt="Bot Profile">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Copy invite
+    function copyInvite() {
+      const link = document.getElementById("inviteLink");
+      navigator.clipboard.writeText(link.value);
+      alert("Invite link copied!");
+    }
+
+    // Particle system
+    const canvas = document.getElementById("particleCanvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let mouse = { x: null, y: null };
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener("mousemove", (e) => { mouse.x = e.x; mouse.y = e.y; });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 4 + 2;
+        this.speedX = (Math.random() - 0.5) * 1.2;
+        this.speedY = (Math.random() - 0.5) * 1.2;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = "#a0c4ff";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+    function connectParticles() {
+      let maxDist = 120;
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          let dx = particles[a].x - particles[b].x;
+          let dy = particles[a].y - particles[b].y;
+          let dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < maxDist) {
+            ctx.strokeStyle = `rgba(160,196,255,${1 - dist/maxDist})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+
+        if (mouse.x && mouse.y) {
+          let dx = particles[a].x - mouse.x;
+          let dy = particles[a].y - mouse.y;
+          let dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 150) {
+            ctx.strokeStyle = `rgba(160,196,255,${1 - dist/150})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      connectParticles();
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+</body>
+</html>
