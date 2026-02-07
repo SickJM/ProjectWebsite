@@ -2,4 +2,4 @@
 A simple website for sharing my projects and passions.
 
 Background Video:
-Video by Stephan LaCasse: https://www.pexels.com/video/abstract-gradient-animation-with-flowing-waves-29397254/
+Video by Weldi 33 Studio Design: https://www.pexels.com/video/digital-abstract-animation-8675539/
